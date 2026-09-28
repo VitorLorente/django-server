@@ -10,7 +10,7 @@
 </head>
 <body>
     <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>Servidor de Arquivos (Django)</h1>
+        <h1>Servidor de Arquivos Local (Jack)</h1>
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button type="submit" style="background: #dc3545;">Sair (Logout)</button>
@@ -18,7 +18,7 @@
     </div>
 <p>Olá, <strong>{{ request.user.username }}</strong>!</p>
 <hr>
-    <h1>Servidor de Arquivos (Django)</h1>
+    <h2>Meus arquivos</h2>
     
     <div class="box">
         <h2>Fazer Upload</h2>
