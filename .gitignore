@@ -1,0 +1,6 @@
+media/uploads/*
+db.sqlite3
+.venv/
+*.pyc
+__pycache__/
+.vscode/

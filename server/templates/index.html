@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django File Server</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+        .box { background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        button { background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Servidor de Arquivos (Django)</h1>
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="background: #dc3545;">Sair (Logout)</button>
+        </form>
+    </div>
+<p>Olá, <strong>{{ request.user.username }}</strong>!</p>
+<hr>
+    <h1>Servidor de Arquivos (Django)</h1>
+    
+    <div class="box">
+        <h2>Fazer Upload</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file" required><br><br>
+            <button type="submit">Enviar Arquivo</button>
+        </form>
+    </div>
+
+    <div class="box">
+        <h2>Arquivos para Download</h2>
+        <ul>
+            {% for arquivo in arquivos %}
+                <li><a href="/media/uploads/{{ arquivo }}" download>{{ arquivo }}</a></li>
+            {% empty %}
+                <li>Nenhum arquivo enviado ainda.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
