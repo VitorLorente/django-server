@@ -30,14 +30,36 @@
     </div>
 
     <div class="box">
-        <h2>Arquivos para Download</h2>
-        <ul>
-            {% for arquivo in arquivos %}
-                <li><a href="/media/uploads/{{ arquivo }}" download>{{ arquivo }}</a></li>
-            {% empty %}
-                <li>Nenhum arquivo enviado ainda.</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <h2>Arquivos para Download</h2>
+    <ul>
+        {% for arquivo in arquivos %}
+            <li style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; background: #fff; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+                <!-- Link de Download -->
+                <a href="/media/uploads/{{ arquivo }}" download style="text-decoration: none; color: #333; font-weight: bold;">
+                    📄 {{ arquivo }}
+                </a>
+                
+                <!-- Botões de Ação -->
+                <div style="display: flex; gap: 8px;">
+                    <!-- Botão Editar (Lápis) -->
+                    <a href="{% url 'editar_arquivo' arquivo %}" title="Editar nome" style="text-decoration: none; padding: 4px 8px; background: #ffc107; color: black; border-radius: 4px; font-size: 14px;">
+                        ✏️ Editar
+                    </a>
+
+                    <!-- Botão Deletar (Lixeira via formulário POST por segurança) -->
+                    <form action="{% url 'deletar_arquivo' arquivo %}" method="POST" style="margin: 0;" onsubmit="return confirm('Tem certeza que deseja deletar este arquivo?');">
+                        {% csrf_token %}
+                        <button type="submit" title="Deletar arquivo" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                            🗑️ Deletar
+                        </button>
+                    </form>
+                </div>
+            </li>
+        {% empty %}
+            <li>Nenhum arquivo enviado ainda.</li>
+        {% endfor %}
+    </ul>
+</div>
+
 </body>
 </html>

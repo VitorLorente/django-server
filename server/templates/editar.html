@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Nome do Arquivo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 60px auto; padding: 20px; }
+        .box { background: #f4f4f4; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        input[type="text"] { width: 100%; padding: 10px; margin: 15px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-save { background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        .btn-cancel { background: #6c757d; color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; margin-left: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Renomear Arquivo</h2>
+        <p>Nome atual: <strong>{{ nome_arquivo }}</strong></p>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <label for="novo_nome">Digite o novo nome:</label>
+            <input type="text" id="novo_nome" name="novo_nome" value="{{ nome_arquivo }}" required autocomplete="off">
+            
+            <button type="submit" class="btn-save">Salvar Alterações</button>
+            <a href="{% url 'index' %}" class="btn-cancel">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
